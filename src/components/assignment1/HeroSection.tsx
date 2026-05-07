@@ -1,5 +1,6 @@
 import './HeroSection.css'
 import Person from "../assignment2/Person";
+import Counter from "../assignment3/Counter";
 
 const HeroSection = () => (
     <>
@@ -22,17 +23,10 @@ const HeroSection = () => (
                     <p className="price">$70.00</p>
                 </div>
                 <div className="product-card">
-                    <img src="https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=300&q=80" alt="Product 2" />
-                    <h3>SkinCeuticals Phyto Corrective Hydrating + Calming Gel Serum</h3>
-                    <p className="price">$70.00</p>
-                </div>
-                <div className="product-card">
-                    <img src="https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=300&q=80" alt="Product 3" />
-                    <h3>SkinCeuticals Phyto Corrective Hydrating + Calming Gel Serum</h3>
-                    <p className="price">$70.00</p>
-                </div>
-                <div className="product-card">
                     <Person name={"Iain"} age={39} country={"US"} />
+                </div>
+                <div className="product-card">
+                    <Counter />
                 </div>
             </div>
         </div>

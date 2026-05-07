@@ -1,3 +1,5 @@
+import './Person.css'
+
 interface PersonProps {
     name: string;
     age: number;
@@ -15,10 +17,15 @@ const Country = ({ country }: { country: string }) => {
 
 const Person = ({ name, age, country }: PersonProps) => {
     return (
-        <div className="person-card">
-            <h2>{name}, {age} years old</h2>
-            <p>Country: {country}</p>
-            <Country country={country} />
+        <div className="counter-container">
+            <div className="counter-content">
+                <h2>{name}, {age} years old</h2>
+                <p>Country: {country}</p>
+                <Country country={country} />
+            </div>
+                <div className="footer">
+                    <h6>Assignment 2</h6>
+                </div>
         </div>
     );
 };

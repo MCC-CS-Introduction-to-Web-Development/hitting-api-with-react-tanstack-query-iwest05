@@ -1,34 +1,24 @@
-.person-card {
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    text-align: center;
-    width: 300px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s;
-}
-
-.person-card:hover {
-    transform: translateY(-5px);
-}
-
-.person-card h2 {
-    color: #2d2d7f;
-    font-size: 1.2em;
-    margin: 15px 0;
-    line-height: 1.4;
-}
-
-.person-card p {
-    color: #666;
-    font-size: 1em;
-    line-height: 1.6;
-    margin: 0 0 30px 0;
-}
-
 .country-flag img {
-    width: 50px;
-    height: auto;
+    width: 280px;
+    height: 200px;
     display: block;
-    margin: 0 auto 20px;
+    margin: 0;
+}
+
+.counter-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.counter-content {
+    flex: 1;
+}
+
+.footer {
+    margin-top: auto;
+}
+
+.footer h6 {
+    margin: 0;
 }
