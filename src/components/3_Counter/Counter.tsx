@@ -1,5 +1,6 @@
+"use client";
 import { useState, MouseEvent, useEffect } from "react";
-import './Counter.css';
+import styles from './Counter.module.css';
 
 const Counter = () => {
     const [count, setCount] = useState(0);
@@ -19,17 +20,17 @@ const Counter = () => {
     }, [count]);
 
     return (
-        <div className="counter-container">
-            <div className="counter-content">
+        <div className={styles.counterContainer}>
+            <div className={styles.counterContent}>
                 <h2>{count}</h2>
-                <button className="button" type="button" onClick={handleIncrement}>
+                <button className={styles.button} type="button" onClick={handleIncrement}>
                     Increment
                 </button>
-                <button className="button" type="button" onClick={handleDecrement}>
+                <button className={styles.button} type="button" onClick={handleDecrement}>
                     Decrement
                 </button>
             </div>
-            <div className="footer">
+            <div className={styles.footer}>
                 <h6>Assignment 3</h6>
             </div>
         </div>

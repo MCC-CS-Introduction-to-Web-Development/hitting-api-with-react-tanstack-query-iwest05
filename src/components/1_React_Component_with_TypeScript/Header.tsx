@@ -1,9 +1,10 @@
+"use client";
 import React from "react";
-import './Header.css'
+import styles from './Header.module.css'
 
 const Header = () => (
     <>
-        <header className="App-header">
+        <header className={styles.appHeader}>
             <h1> Dolor </h1>
         </header>
     </>

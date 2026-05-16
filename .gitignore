@@ -1,6 +1,7 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 .idea
+.next
 package-lock.json
 Front_End_Web_Development.iml
 
@@ -8,6 +9,7 @@ Front_End_Web_Development.iml
 /node_modules
 /.pnp
 .pnp.js
+
 
 # testing
 /coverage

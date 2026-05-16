@@ -1,5 +1,6 @@
+"use client";
 import { MouseEvent } from "react";
-import './ButtonCounter.css';
+import styles from './ButtonCounter.module.css';
 
 interface ButtonCounterProps {
     count: number;
@@ -13,14 +14,14 @@ const ButtonCounter = ({ count, onIncrement }: ButtonCounterProps) => {
     };
 
     return (
-        <div className="counter-container">
+        <div className={styles.counterContainer}>
             <div className="counter-content">
                 <h2>{count}</h2>
-                <button className="button" type="button" onClick={handleClick}>
+                <button className={styles.button} type="button" onClick={handleClick}>
                     Increment
                 </button>
             </div>
-            <div className="footer">
+            <div className={styles.footer}>
                 <h6>Assignment 4</h6>
             </div>
         </div>
