@@ -1,5 +1,5 @@
 import Link from "next/link";
-import PullData from "@/components/6_Axios/PullData";
+import DataDisplay from "../../components/6_Axios/DataDisplay";
 
 export default function RecipesPage() {
     return (
@@ -12,7 +12,7 @@ export default function RecipesPage() {
                     ← Back to Home
                 </Link>
                 <h1 className="text-3xl font-bold text-[#2d2d7f] mb-8">Pull Data</h1>
-                <PullData />
+                <DataDisplay />
             </div>
         </main>
     );

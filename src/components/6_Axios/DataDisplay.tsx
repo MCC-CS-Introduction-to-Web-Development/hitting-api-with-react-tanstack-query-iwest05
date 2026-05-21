@@ -16,7 +16,7 @@ interface NewAlbum {
     title: string;
 }
 
-const PullData = () => {
+const DataDisplay = () => {
     const [albums, setAlbums] = useState<Album[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | undefined>(undefined);
@@ -158,4 +158,4 @@ const PullData = () => {
     );
 };
 
-export default PullData;
+export default DataDisplay;
