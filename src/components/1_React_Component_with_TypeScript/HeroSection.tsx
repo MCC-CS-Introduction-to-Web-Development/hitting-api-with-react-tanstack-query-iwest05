@@ -63,7 +63,7 @@ const HeroSection = () => {
                     <ButtonCounter count={count} onIncrement={handleIncrement} />
                 </div>
 
-                {/* Recipe Form link card */}
+                {/* Recipe Form Link Card */}
                 <div className="bg-white p-5 rounded-lg text-center w-72 shadow-md transition-transform hover:-translate-y-1 flex flex-col items-center justify-center gap-4">
                     <h3 className="text-[#2d2d7f] text-base font-semibold">Recipe Form</h3>
                     <Link
@@ -73,6 +73,16 @@ const HeroSection = () => {
                         Go to Recipes
                     </Link>
                     <p className="text-gray-500 text-sm">Assignment 5</p>
+                </div>
+                {/* Axios Data Pull Card */}
+                <div className="bg-white p-5 rounded-lg text-center w-72 shadow-md transition-transform hover:-translate-y-1 flex flex-col items-center justify-center gap-4">
+                    <Link
+                        href="/dataPull"
+                        className="bg-[#2d2d7f] text-white px-6 py-2 rounded font-semibold text-sm hover:bg-[#1f1f5a] transition-colors"
+                    >
+                        Go to Data
+                    </Link>
+                    <p className="text-gray-500 text-sm">Assignment 6</p>
                 </div>
             </div>
         </div>
