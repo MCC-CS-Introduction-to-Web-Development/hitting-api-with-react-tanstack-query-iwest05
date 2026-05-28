@@ -1,7 +1,7 @@
 "use client";
 
 import axios from "axios";
-import {ChangeEvent, SyntheticEvent, useEffect, useState} from "react";
+import { ChangeEvent, SyntheticEvent, useEffect, useState } from "react";
 
 const ALL_ALBUMS_URL = "https://jsonplaceholder.typicode.com/albums";
 
