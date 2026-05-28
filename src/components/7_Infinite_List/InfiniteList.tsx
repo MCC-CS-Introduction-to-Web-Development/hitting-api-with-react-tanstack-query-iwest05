@@ -30,32 +30,39 @@ interface ApiObject {
 const InfiniteList = () => {
     const [products, setProducts] = useState<ApiObject[]>([]);
     const offsetRef = useRef(10);
+    const loadingRef = useRef(false);
+    const hasMoreRef = useRef(true);
     const [initialized, setInitialized] = useState(false);
-    const [loading, setLoading] = useState(false);
     const [hasMore, setHasMore] = useState(true);
     const observerRef = useRef<IntersectionObserver | null>(null);
     const sentinelRef = useRef<HTMLDivElement | null>(null);
+    const [loading, setLoading] = useState(false);
 
     const fetchProducts = useCallback(async (currentOffset: number): Promise<void> => {
-        if (loading || !hasMore) return;
+        if (loadingRef.current || !hasMoreRef.current) return;
+        loadingRef.current = true;
         setLoading(true);
         try {
             const response = await axios.get<ApiObject[]>(BASE_URL, {
                 params: { offset: currentOffset, limit: LIMIT },
             });
             const data = response.data;
-            if (data.length < LIMIT) setHasMore(false);
+            if (data.length < LIMIT) {
+                hasMoreRef.current = false;
+                setHasMore(false);
+            }
             setProducts((prev) => [...prev, ...data]);
             offsetRef.current += LIMIT;
         } catch (err) {
             console.error("Failed to fetch products:", err);
         } finally {
+            loadingRef.current = false;
             setLoading(false);
         }
-    }, [loading, hasMore]);
+    }, []);
 
     useEffect(() => {
-        fetchProducts(10).then(() => setInitialized(true));
+        fetchProducts(offsetRef.current).then(() => setInitialized(true));
     }, []);
 
     useEffect(() => {
@@ -63,7 +70,7 @@ const InfiniteList = () => {
         if (observerRef.current) observerRef.current.disconnect();
 
         observerRef.current = new IntersectionObserver((entries) => {
-            if (entries[0].isIntersecting && hasMore && !loading) {
+            if (entries[0].isIntersecting) {
                 fetchProducts(offsetRef.current);
             }
         });
@@ -71,7 +78,7 @@ const InfiniteList = () => {
         if (sentinelRef.current) observerRef.current.observe(sentinelRef.current);
 
         return () => observerRef.current?.disconnect();
-    }, [initialized, hasMore, loading, fetchProducts]);
+    }, [initialized, fetchProducts]);
 
     const getFirstValidImage = (images: string[]) => {
         return images.find((img) => img.startsWith("http")) ?? null;
