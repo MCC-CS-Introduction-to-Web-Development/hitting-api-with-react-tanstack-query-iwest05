@@ -1,6 +1,8 @@
 import '@/styles/globals.css';
 import { ReactNode } from "react";
 import type { Metadata } from 'next';
+import Providers from "@/app/providers";
+
 
 export const metadata: Metadata = {
     title: 'Front End Web Development',
@@ -11,7 +13,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     return (
         <html lang="en">
             <body className="min-h-screen bg-[#f6f5f9] font-sans antialiased">
+            <Providers>
                 {children}
+            </Providers>
             </body>
         </html>
     );

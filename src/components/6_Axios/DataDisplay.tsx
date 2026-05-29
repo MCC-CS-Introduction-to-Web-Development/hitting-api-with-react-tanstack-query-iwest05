@@ -1,45 +1,19 @@
 "use client";
 
-import axios from "axios";
-import { ChangeEvent, SyntheticEvent, useEffect, useState } from "react";
+import { ChangeEvent, SyntheticEvent, useState } from "react";
+import { useQuery, useMutation } from "@tanstack/react-query";
+import { albumsQuery, NewAlbum, createAlbum } from "@/app/queries/albums";
 
-const ALL_ALBUMS_URL = "https://jsonplaceholder.typicode.com/albums";
 
-interface Album {
-    userId: number;
-    id: number;
-    title: string;
-}
-
-interface NewAlbum {
-    userId: string;
-    title: string;
-}
 
 const DataDisplay = () => {
-    const [albums, setAlbums] = useState<Album[]>([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState<string | undefined>(undefined);
-
     // Form state
     const [formData, setFormData] = useState<NewAlbum>({ userId: "", title: "" });
-    const [submitting, setSubmitting] = useState(false);
     const [submitError, setSubmitError] = useState<string | undefined>(undefined);
     const [submitSuccess, setSubmitSuccess] = useState<string | undefined>(undefined);
 
-    useEffect(() => {
-        async function fetchAlbums() {
-            try {
-                const response = await axios.get<Album[]>(ALL_ALBUMS_URL);
-                setAlbums(response.data);
-            } catch (e) {
-                setError("Failed to load albums. Please refresh.");
-            } finally {
-                setLoading(false);
-            }
-        }
-        fetchAlbums();
-    }, []);
+    const { data: albums = [], isLoading, isError } = useQuery(albumsQuery)
+    const { mutateAsync, isPending } = useMutation({ mutationFn: createAlbum });
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -55,19 +29,12 @@ const DataDisplay = () => {
             return;
         }
 
-        setSubmitting(true);
         try {
-            const response = await axios.post<Album>(ALL_ALBUMS_URL, {
-                userId: Number(formData.userId),
-                title: formData.title.trim(),
-            });
-            setAlbums([response.data, ...albums]);
+            const album = await mutateAsync(formData);
             setFormData({ userId: "", title: "" });
-            setSubmitSuccess(`Album "${response.data.title}" added (id: ${response.data.id}).`);
-        } catch (e) {
+            setSubmitSuccess(`Album "${album.title}" added (id: ${album.id}).`);
+        } catch {
             setSubmitError("Failed to add album. Please try again.");
-        } finally {
-            setSubmitting(false);
         }
     };
 
@@ -111,10 +78,10 @@ const DataDisplay = () => {
                     )}
                     <button
                         type="submit"
-                        disabled={submitting}
+                        disabled={isPending}
                         className="bg-[#2d2d7f] text-white px-6 py-2 rounded font-semibold text-sm hover:bg-[#1f1f5a] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                        {submitting ? "Adding..." : "Add Album"}
+                        {isPending ? "Adding..." : "Add Album"}
                     </button>
                 </form>
             </div>
@@ -122,13 +89,13 @@ const DataDisplay = () => {
             {/* Albums Table */}
             <div className="bg-white rounded-lg shadow-md overflow-hidden">
                 <h2 className="text-xl font-bold text-[#2d2d7f] p-6 pb-4">Albums</h2>
-                {loading && (
+                {isLoading && (
                     <p className="text-gray-500 text-sm px-6 pb-6">Loading albums...</p>
                 )}
-                {error && (
-                    <p className="text-red-500 text-sm px-6 pb-6">{error}</p>
+                {isError && (
+                    <p className="text-red-500 text-sm px-6 pb-6">{isError}</p>
                 )}
-                {!loading && !error && (
+                {!isLoading && !isError && (
                     <div className="overflow-x-auto">
                         <table className="w-full text-sm">
                             <thead className="bg-[#2d2d7f] text-white">
