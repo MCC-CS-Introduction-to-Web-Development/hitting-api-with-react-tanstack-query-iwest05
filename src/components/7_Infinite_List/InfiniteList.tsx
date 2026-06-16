@@ -51,10 +51,10 @@ const InfiniteList = () => {
                 hasMoreRef.current = false;
                 setHasMore(false);
             }
-            setProducts((prev) => [...prev, ...data]);
+            setProducts((previousProductList) => [...previousProductList, ...data]);
             offsetRef.current += LIMIT;
-        } catch (err) {
-            console.error("Failed to fetch products:", err);
+        } catch (productFetchError) {
+            console.error("Failed to fetch products:", productFetchError);
         } finally {
             loadingRef.current = false;
             setLoading(false);
@@ -69,8 +69,8 @@ const InfiniteList = () => {
         if (!initialized) return;
         if (observerRef.current) observerRef.current.disconnect();
 
-        observerRef.current = new IntersectionObserver((entries) => {
-            if (entries[0].isIntersecting) {
+        observerRef.current = new IntersectionObserver((intersectionObserverEntries) => {
+            if (intersectionObserverEntries[0].isIntersecting) {
                 fetchProducts(offsetRef.current);
             }
         });
@@ -81,7 +81,7 @@ const InfiniteList = () => {
     }, [initialized, fetchProducts]);
 
     const getFirstValidImage = (images: string[]) => {
-        return images.find((img) => img.startsWith("http")) ?? null;
+        return images.find((imageUrl) => imageUrl.startsWith("http")) ?? null;
     };
 
     return (
@@ -89,12 +89,12 @@ const InfiniteList = () => {
             <h1 className="text-3xl font-bold mb-6">Products</h1>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                 {products.map((product) => {
-                    const img = getFirstValidImage(product.images);
+                    const productImageUrl = getFirstValidImage(product.images);
                     return (
                         <div key={product.id} className="border border-gray-200 rounded-lg overflow-hidden flex flex-col shadow-sm hover:shadow-md transition-shadow">
-                            {img && (
+                            {productImageUrl && (
                                 <img
-                                    src={img}
+                                    src={productImageUrl}
                                     alt={product.title}
                                     className="w-full h-48 object-cover"
                                 />

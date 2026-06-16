@@ -94,6 +94,17 @@ const HeroSection = () => {
                     </Link>
                     <p className="text-gray-500 text-sm">Assignment 7</p>
                 </div>
+                {/* Web Storage Card */}
+                <div className="bg-white p-5 rounded-lg text-center w-72 shadow-md transition-transform hover:-translate-y-1 flex flex-col items-center justify-center gap-4">
+                    <h3 className="text-[#2d2d7f] text-base font-semibold">Web Storage</h3>
+                    <Link
+                        href="/webStorage"
+                        className="bg-[#2d2d7f] text-white px-6 py-2 rounded font-semibold text-sm hover:bg-[#1f1f5a] transition-colors"
+                    >
+                        Go to Web Storage
+                    </Link>
+                    <p className="text-gray-500 text-sm">Assignment 8</p>
+                </div>
                 {/* External Pages Card */}
                 <div className="bg-white p-5 rounded-lg text-center w-72 shadow-md transition-transform hover:-translate-y-1 flex flex-col items-center justify-center gap-4">
                     <p className="text-gray-500 text-sm">External Links</p>

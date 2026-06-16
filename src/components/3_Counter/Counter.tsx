@@ -4,13 +4,13 @@ import { useState, MouseEvent, useEffect } from "react";
 const Counter = () => {
     const [count, setCount] = useState(0);
 
-    const handleIncrement = (e: MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault();
+    const handleIncrement = (mouseClickEvent: MouseEvent<HTMLButtonElement>) => {
+        mouseClickEvent.preventDefault();
         setCount(count + 1);
     };
 
-    const handleDecrement = (e: MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault();
+    const handleDecrement = (mouseClickEvent: MouseEvent<HTMLButtonElement>) => {
+        mouseClickEvent.preventDefault();
         setCount(count > 0 ? count - 1 : 0);
     };
 

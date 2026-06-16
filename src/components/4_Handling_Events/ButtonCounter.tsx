@@ -7,8 +7,8 @@ interface ButtonCounterProps {
 }
 
 const ButtonCounter = ({ count, onIncrement }: ButtonCounterProps) => {
-    const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault();
+    const handleClick = (mouseClickEvent: MouseEvent<HTMLButtonElement>) => {
+        mouseClickEvent.preventDefault();
         onIncrement();
     };
 

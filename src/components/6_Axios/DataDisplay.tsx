@@ -15,12 +15,12 @@ const DataDisplay = () => {
     const { data: albums = [], isLoading, isError } = useQuery(albumsQuery)
     const { mutateAsync, isPending } = useMutation({ mutationFn: createAlbum });
 
-    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
+    const handleChange = (inputChangeEvent: ChangeEvent<HTMLInputElement>) => {
+        setFormData({ ...formData, [inputChangeEvent.target.name]: inputChangeEvent.target.value });
     };
 
-    const handleSubmit = async (e: SyntheticEvent) => {
-        e.preventDefault();
+    const handleSubmit = async (formSubmitEvent: SyntheticEvent) => {
+        formSubmitEvent.preventDefault();
         setSubmitError(undefined);
         setSubmitSuccess(undefined);
 
@@ -106,10 +106,10 @@ const DataDisplay = () => {
                             </tr>
                             </thead>
                             <tbody>
-                            {albums.map((album, index) => (
+                            {albums.map((album, albumRowIndex) => (
                                 <tr
                                     key={album.id}
-                                    className={index % 2 === 0 ? "bg-white" : "bg-[#f6f5f9]"}
+                                    className={albumRowIndex % 2 === 0 ? "bg-white" : "bg-[#f6f5f9]"}
                                 >
                                     <td className="px-4 py-3 text-gray-500">{album.id}</td>
                                     <td className="px-4 py-3 text-gray-500">{album.userId}</td>

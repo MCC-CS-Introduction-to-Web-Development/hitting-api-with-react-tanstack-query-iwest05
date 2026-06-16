@@ -64,16 +64,16 @@ const RecipeForm = () => {
                                         value={ingredient}
                                         className={inputClass}
                                         placeholder={`Ingredient ${index + 1}`}
-                                        onChange={(e) => {
+                                        onChange={(ingredientChangeEvent) => {
                                             const updated = [...ingredients];
-                                            updated[index] = e.target.value;
+                                            updated[index] = ingredientChangeEvent.target.value;
                                             setIngredients(updated);
                                         }}
                                     />
                                     {ingredients.length > 1 && (
                                         <button
                                             type="button"
-                                            onClick={() => setIngredients(ingredients.filter((_, i) => i !== index))}
+                                            onClick={() => setIngredients(ingredients.filter((_, ingredientIndex) => ingredientIndex !== index))}
                                             className="text-red-400 hover:text-red-600 text-sm px-2"
                                         >
                                             ✕
